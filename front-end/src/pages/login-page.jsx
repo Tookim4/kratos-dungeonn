@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 // import {toast} from 'react-toastify'
 import Card from 'react-bootstrap/Card';
+// import {toast} from 'react-toastify'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/esm/Container';
 import Form from 'react-bootstrap/Form';
@@ -26,7 +27,7 @@ const LoginForm = ()=> {
 
   useEffect(() => {
     if (isError) {
-      return (message)
+     console.log(message)
     }
 
     if (isSuccess || user) {

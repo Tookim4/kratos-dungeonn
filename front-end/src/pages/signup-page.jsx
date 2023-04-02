@@ -28,7 +28,7 @@ const SignUpForm = ()=> {
 
   useEffect(() => {
     if (isError) {
-      return (message)
+      console.log(message)
     }
 
     if (isSuccess || user) {

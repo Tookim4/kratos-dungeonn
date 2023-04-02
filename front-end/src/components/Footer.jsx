@@ -7,7 +7,7 @@ const Footer = ()=> {
     <MDBFooter bgColor='none' className='text-center text-lg-left fixed-bottom'>
       <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)'}}>
         &copy; {new Date().getFullYear()} Copyright:{' '}
-        <a className='text-dark' href='https://mdbootstrap.com/'>
+        <a className='text-dark' href='/'>
           DeathStoke
         </a>
       </div>

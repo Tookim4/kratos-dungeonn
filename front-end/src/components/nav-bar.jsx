@@ -3,8 +3,21 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom'
+import {logout, reset} from '../features/authSlice'
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 const NavBar = ()=> {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.auth)
+
+  const onLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+  }
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="none" variant="dark">
       <Container>
@@ -13,16 +26,21 @@ const NavBar = ()=> {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto">
             {/* //login link/ */}
-         
+         {user ? (
+            <button className='btn' onClick={onLogout}>
+            Logout
+            </button>
+         ):(<>
             <Link className='nav-link' to={'/pages/login-page'}>
               Login
             </Link>
              
-            
-              {      /* sign up link */}  
             <Link className='nav-link' eventkey={2} to={'/pages/signup-page'}>
               Sign Up
             </Link>
+         </>
+         )}
+            
 
           </Nav>
         </Navbar.Collapse>
