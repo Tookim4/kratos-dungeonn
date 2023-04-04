@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,6 +11,12 @@ const NavBar = ()=> {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    if (user) {
+     
+    }
+  }, []);
 
   const onLogout = () => {
     dispatch(logout())
@@ -27,9 +33,14 @@ const NavBar = ()=> {
           <Nav className="ms-auto">
             {/* //login link/ */}
          {user ? (
-            <button className='btn' onClick={onLogout}>
+          <>
+          <Link className='nav-link'>
+            {user.name}
+          </Link>
+            <button className='nav-link btn' onClick={onLogout}>
             Logout
             </button>
+          </>
          ):(<>
             <Link className='nav-link' to={'/pages/login-page'}>
               Login

@@ -41,7 +41,7 @@ const LandPage = () => {
         <NavBar/>
            <Container style={{ display:'flex', justifyContent:'right', alignItems:'right'}}>
             <WelcomeDiv>
-                <h1>Hi, good to see you...</h1>
+                <h1>Hi , good to see you...</h1>
                 <section>
                   <p>Feeling lost?
                     Don't worry, <br /> just sign-up or login from the navigation bar and start writing anything. <br />
