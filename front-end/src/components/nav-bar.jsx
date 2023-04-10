@@ -37,6 +37,9 @@ const NavBar = ()=> {
           <Link className='nav-link'>
             {user.name}
           </Link>
+          <Link className='nav-link' to={'/pages/notes-page'}>
+              Notes
+            </Link>
             <button className='nav-link btn' onClick={onLogout}>
             Logout
             </button>

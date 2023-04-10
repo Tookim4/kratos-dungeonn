@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import LandPage from "./pages/land-page"; 
 import LoginPage from './pages/login-page';
 import SignUpForm from './pages/signup-page';
+import notesPage from './pages/notes-page';
 
 const App = ()=> { 
   return (
@@ -15,6 +16,7 @@ const App = ()=> {
             <Route path='/' Component={LandPage}/>
             <Route path='pages/login-page' Component={LoginPage}/>
             <Route path='pages/signup-page' Component={SignUpForm}/>
+            <Route path='pages/notes-page' Component={notesPage}/>
           </Routes>
       </BrowserRouter>
         {/* <ToastContainer/> */}
