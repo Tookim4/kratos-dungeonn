@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useDispatch } from 'react-redux';
 import { createNote } from '../features/notesSlice';
 
-const notesInput = () => {
+export const NotesInput = () => {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -16,7 +16,7 @@ const notesInput = () => {
       return;
     }
 
-    dispatch(createNote({ title, content }));
+    dispatch(createNote({ title, content }, ));
 
     setTitle('');
     setContent('');
@@ -47,4 +47,4 @@ const notesInput = () => {
 };
 
 
-export default notesInput
+// export default NotesInput

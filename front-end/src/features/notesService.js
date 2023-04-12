@@ -7,8 +7,8 @@ const getAll = async () => {
   return response.data;
 };
 
-const create = async (newObject) => {
-  const response = await axios.post(baseUrl, newObject);
+const create = async (newObject, userId) => {
+  const response = await axios.post(baseUrl, {...newObject, user: userId});
   return response.data;
 };
 

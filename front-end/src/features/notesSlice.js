@@ -17,6 +17,14 @@ export const notesSlice = createSlice({
     setNotes: (state, action) => {
       state.notes = action.payload;
     },
+    updateNote: (state, action) => {
+      const { id, title, content } = action.payload;
+      const noteToUpdate = state.notes.find((note) => note.id === id);
+      if (noteToUpdate) {
+        noteToUpdate.title = title;
+        noteToUpdate.content = content;
+      }
+    },
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
@@ -26,12 +34,12 @@ export const notesSlice = createSlice({
   },
 });
 
-export const { addNote, setNotes, setLoading, setError } = notesSlice.actions;
+export const { addNote, setNotes, updateNote, setLoading, setError } = notesSlice.actions;
 
-export const createNote = (note) => async (dispatch) => {
+export const createNote = (note, userId) => async (dispatch) => {
   dispatch(setLoading(true));
   try {
-    const newNote = await notesService.create(note);
+    const newNote = await notesService.create(note, userId);
     dispatch(addNote(newNote));
     dispatch(setLoading(false));
   } catch (error) {
@@ -51,6 +59,38 @@ export const getNotes = () => async (dispatch) => {
     dispatch(setLoading(false));
   }
 };
+
+// export const updateNoteContent = async (id, updatedNote, dispatch) => {
+//   dispatch(setLoading(true));
+//   try {
+//     await notesService.update(id, updatedNote);
+//     dispatch(getNotes());
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+export const updateNoteContent = (updatedNote) => async (dispatch) => {
+  dispatch(setLoading(true));
+  try {
+    await notesService.update(updatedNote.id, updatedNote);
+    dispatch(editNoteInStore(updatedNote));
+    dispatch(setLoading(false));
+  } catch (error) {
+    dispatch(setError(error.message));
+    dispatch(setLoading(false));
+  }
+};
+
+export const editNoteInStore = (updatedNote) => (dispatch, getState) => {
+  const { notes } = getState().notesSlice;
+  const index = notes.findIndex((note) => note.id === updatedNote.id);
+  if (index !== -1) {
+    notes[index] = updatedNote;
+    dispatch(setNotes(notes));
+  }
+};
+
 
 export const deleteNote = (id) => async (dispatch) => {
   dispatch(setLoading(true));
