@@ -7,10 +7,12 @@ import LandPage from "./pages/land-page";
 import LoginPage from './pages/login-page';
 import SignUpForm from './pages/signup-page';
 import notesPage from './pages/notes-page';
+import { GlobalStyle } from './styledcomponents/land-page-styled';
 
 const App = ()=> { 
   return (
     <div>
+      <GlobalStyle/>
       <BrowserRouter>
           <Routes>
             <Route path='/' Component={LandPage}/>

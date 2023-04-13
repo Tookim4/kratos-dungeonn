@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { Button, Container, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { createNote } from '../features/notesSlice';
 
@@ -23,26 +24,36 @@ export const NotesInput = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Container style={{margin: '10px 0', padding:'15px 0'}}>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3">
       <div>
-        <label htmlFor="title">Title</label>
-        <input
+        {/* <Form.Label htmlFor="title">Title</Form.Label> */}
+        <Form.Control
           type="text"
           id="title"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
+          placeholder='Title'
         />
       </div>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
       <div>
-        <label htmlFor="content">Content</label>
-        <textarea
+        {/* <Form.Label htmlFor="content">Content</Form.Label> */}
+        <Form.Control
+          type='text'
           id="content"
           value={content}
           onChange={(event) => setContent(event.target.value)}
+          placeholder='Content'
         />
       </div>
-      <button type="submit">Create Note</button>
-    </form>
+      </Form.Group>
+      <Button type="submit">Create Note</Button>
+    </Form>
+    </Container>
   );
 };
 

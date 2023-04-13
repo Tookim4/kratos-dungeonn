@@ -1,17 +1,23 @@
 import React from 'react';
-import { MDBFooter } from 'mdb-react-ui-kit';
+import { Container, Row, Col } from 'react-bootstrap';
 
 
 const Footer = ()=> {
   return (
-    <MDBFooter bgColor='none' className='text-center text-lg-left fixed-bottom'>
-      <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)'}}>
-        &copy; {new Date().getFullYear()} Copyright:{' '}
-        <a className='text-dark' href='/'>
-          DeathStoke
+    <footer className="bg-dark text-light py-3 mb-0">
+    <Container>
+      <Row>
+        <Col md={6}>
+          <p>&copy; {new Date().getFullYear()} Copyright:{'TheDungeon'}</p>
+        </Col>
+        <Col md={6}>
+        <a style={{color: 'white', textDecoration: 'none'}} href='/'>
+          DeathStroke
         </a>
-      </div>
-    </MDBFooter>
+        </Col>
+      </Row>
+    </Container>
+  </footer>
   );
 }
 
