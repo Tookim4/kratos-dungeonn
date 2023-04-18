@@ -3,10 +3,11 @@ import NavBar from "../components/nav-bar"
 import Footer from "../components/Footer"
 import {Container, Row, Col} from 'react-bootstrap';
 // import { MDBContainer } from 'mdb-react-ui-kit';
-import {Div, GlobalStyle} from '../styledcomponents/land-page-styled'
+import {Div} from '../styledcomponents/land-page-styled'
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { reset } from '../features/authSlice';
+import CursorInteract from '../components/cursorInteract';
 
 const LandPage = () => {
   const navigate = useNavigate()
@@ -39,6 +40,7 @@ const LandPage = () => {
         <Div>
           <div style={{flexGrow:'1'}}>
           <NavBar/>
+          <CursorInteract>
             <Container className="vh-100 d-flex align-items-center">
               <Row className="w-100 justify-content-center" style={{color: 'white'}}>
                 {user ? ( 
@@ -65,6 +67,7 @@ const LandPage = () => {
                 )}
               </Row>
              </Container>
+             </CursorInteract>
              </div>
         </Div>
         <Footer />

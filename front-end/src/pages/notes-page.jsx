@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { deleteNote, getNotes, updateNoteContent } from '../features/notesSlice';
+import { deleteNote, getNotes } from '../features/notesSlice';
 import {NotesInput} from '../components/NotesInput';
 import {Card, Button, Container, Row, Col} from 'react-bootstrap';
 // import { notes } from '../features/notesSlice';

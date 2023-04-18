@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
 export const Div = styled.div`
   min-height: 100%;
   display: flex ;
-  flex-direction; column;
+  flex-direction: column;
   background-image: url(${landimg});
   background-size: cover;
   background-position: center;

@@ -3,8 +3,41 @@ const app = express()
 const asyncHandler = require('express-async-handler')
 const multer = require('multer')
 
-// Set up multer for handling file uploads
-const upload = multer({ dest: 'images/uploads/' });
+// Set up multer storage engine
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'images/')
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname)
+  }
+});
+
+// Init Upload
+const upload = multer({
+  storage: storage,
+  limits:{fileSize: 1000000},
+  fileFilter: function(req, file, cb){
+    checkFileType(file, cb);
+  }
+}).single('image_file');
+
+// Check File Type
+function checkFileType(file, cb){
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png|gif/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+
+  if(mimetype && extname){
+    return cb(null,true);
+  } else {
+    cb('Error: Images Only!');
+  }
+}
+
 
 const Image = require('../models/imageModel')
 
@@ -18,20 +51,14 @@ const getImages = asyncHandler(async(req, res) => {
 })
 
 const createImage = async (req, res) => {
-    upload.single('image')(req, res, async (err) => {
-      if (err) {
-        return res.status(400).json({ message: err.message });
-      }
-      const { name, description } = req.body;
-      const imageUrl = `images/uploads/${req.file.filename}`;
-  
-      try {
-        const image = await Image.create({ name, description, imageUrl });
-        res.status(201).json(image);
-      } catch (error) {
-        res.status(400).json({ message: error.message });
-      }
-    });
+  const newImage = new Image({
+    // name: req.file.filename,
+    // path: req.file.path,
+  });
+
+  newImage.save()
+    .then(image => res.json(image))
+    .catch(err => console.log(err));
   }
   
 
