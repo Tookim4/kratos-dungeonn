@@ -10,25 +10,15 @@ import Footer from '../components/Footer'
 
 const notesPage = (note) => {
   const dispatch = useDispatch();
-  // const [editing, setEditing] = useState(false);
-  // const [newTitle, setNewTitle] = useState(note.title);
-  // const [newContent, setNewContent] = useState(note.content);
-  //get the notes state from redux store
   const notes = useSelector((state) => state.notes.notes);
 
   useEffect(() => {
     dispatch(getNotes());
-  }, [dispatch]);
+  }, [ dispatch]);
 
-//  const handleUpdateNote = ()=>{
-//   const updatedNote = {
-//     id: note.id,
-//     title: newTitle,
-//     content: newContent,
-//   };
-//   dispatch(updateNoteContent(updatedNote));
-//   setEditing(false);
-//  }
+  // if (isLoading) {
+  //   return <h3>LOADING...</h3>
+  // }
 
   return (
     <div style={{backgroundColor: 'darkgray', height: '100vh', display: 'flex', flexDirection:'column'}}>
@@ -47,23 +37,7 @@ const notesPage = (note) => {
             <Card.Title style={{fontSize: '1.1em', padding: '10px 15px'}}><b>{note.title}</b></Card.Title>
             <Card.Text style={{padding: '0 15px', fontSize: '0.8em'}}>{note.content}</Card.Text>
             <Button onClick={() => dispatch(deleteNote(note._id))} style={{width: 'auto', margin: '10px'}} className="btn btn-danger">Delete</Button>
-            <Button style={{width: 'auto', margin: '10px'}}>Update</Button>
-            {/* {editing ? (
-                <div>
-                <input
-                  type="text"
-                  value={newTitle}
-                  onChange={(e) => setNewTitle(e.target.value)}
-                />
-                <textarea
-                  value={newContent}
-                  onChange={(e) => setNewContent(e.target.value)}
-                ></textarea>
-                <button onClick={handleUpdateNote}>Save</button>
-              </div>
-              ) : ( <>
-                <button onClick={() => setEditing(true)}>Edit</button>
-                </>)} */}
+            {/* <Button style={{width: 'auto', margin: '10px'}}>Update</Button> */}
           </Card>
           </Col>
         ))}

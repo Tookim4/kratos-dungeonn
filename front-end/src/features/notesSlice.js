@@ -1,109 +1,122 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import notesService from '../features/notesService';
 
 const initialState = {
   notes: [],
-  loading: false,
-  error: null,
+  isloading: false,
+  isError: false,
+  isSucces: false,
+  message: '',
 };
 
-export const notesSlice = createSlice({
-  name: 'notes',
+//create a new note 
+export const createNote = createAsyncThunk(
+  'notes/create',
+  async (noteData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await notesService.createNote(noteData, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+// Get user notes
+export const getNotes= createAsyncThunk(
+  'notes/getAll',
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await notesService.getNotes(token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+// Delete user goal
+export const deleteNote = createAsyncThunk(
+  'notes/delete',
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await notesService.deleteNote(id, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+export const noteSlice = createSlice({
+  name: 'note',
   initialState,
   reducers: {
-    addNote: (state, action) => {
-      state.notes.push(action.payload);
-    },
-    setNotes: (state, action) => {
-      state.notes = action.payload;
-    },
-    updateNote: (state, action) => {
-      const { id, title, content } = action.payload;
-      const noteToUpdate = state.notes.find((note) => note.id === id);
-      if (noteToUpdate) {
-        noteToUpdate.title = title;
-        noteToUpdate.content = content;
-      }
-    },
-    setLoading: (state, action) => {
-      state.loading = action.payload;
-    },
-    setError: (state, action) => {
-      state.error = action.payload;
-    },
+    reset: (state) => initialState,
   },
-});
-
-export const { addNote, setNotes, updateNote, setLoading, setError } = notesSlice.actions;
-
-export const createNote = (note, userId) => async (dispatch) => {
-  dispatch(setLoading(true));
-  try {
-    const newNote = await notesService.create(note, userId);
-    dispatch(addNote(newNote));
-    dispatch(setLoading(false));
-  } catch (error) {
-    dispatch(setError(error.message));
-    dispatch(setLoading(false));
-  }
-};
-
-export const getNotes = () => async (dispatch) => {
-  dispatch(setLoading(true));
-  try {
-    const notes = await notesService.getAll();
-    dispatch(setNotes(notes));
-    dispatch(setLoading(false));
-  } catch (error) {
-    dispatch(setError(error.message));
-    dispatch(setLoading(false));
-  }
-};
-
-// export const updateNoteContent = async (id, updatedNote, dispatch) => {
-//   dispatch(setLoading(true));
-//   try {
-//     await notesService.update(id, updatedNote);
-//     dispatch(getNotes());
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-
-export const updateNoteContent = (updatedNote) => async (dispatch) => {
-  dispatch(setLoading(true));
-  try {
-    await notesService.update(updatedNote.id, updatedNote);
-    dispatch(editNoteInStore(updatedNote));
-    dispatch(setLoading(false));
-  } catch (error) {
-    dispatch(setError(error.message));
-    dispatch(setLoading(false));
-  }
-};
-
-export const editNoteInStore = (updatedNote) => (dispatch, getState) => {
-  const { notes } = getState().notesSlice;
-  const index = notes.findIndex((note) => note.id === updatedNote.id);
-  if (index !== -1) {
-    notes[index] = updatedNote;
-    dispatch(setNotes(notes));
-  }
-};
-
-
-export const deleteNote = (id) => async (dispatch) => {
-  dispatch(setLoading(true));
-  try {
-    await notesService.remove(id);
-    dispatch(setLoading(false));
-    dispatch(getNotes());
-  } catch (error) {
-    dispatch(setError(error.message));
-    dispatch(setLoading(false));
-  }
-};
+  extraReducers: (builder) => {
+    builder
+      .addCase(createNote.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(createNote.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.notes.push(action.payload)
+      })
+      .addCase(createNote.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(getNotes.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getNotes.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.notes = action.payload
+      })
+      .addCase(getNotes.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(deleteNote.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteNote.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.notes = state.notes.filter(
+          (note) => note._id !== action.payload.id
+        )
+      })
+      .addCase(deleteNote.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+  },
+})
 
 export const notes = (state) => state.notes.notes;
-
-export default notesSlice.reducer;
+export default noteSlice.reducer;

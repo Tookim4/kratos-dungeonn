@@ -13,11 +13,15 @@ export const NotesInput = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!title || !content) {
+    const noteData = {
+      title,
+      content,
+    }
+    
+    if (!noteData) {
       return;
     }
-
-    dispatch(createNote({ title, content }, ));
+    dispatch(createNote(noteData));
 
     setTitle('');
     setContent('');
@@ -31,6 +35,7 @@ export const NotesInput = () => {
         {/* <Form.Label htmlFor="title">Title</Form.Label> */}
         <Form.Control
           type="text"
+          name='text'
           id="title"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
@@ -44,6 +49,7 @@ export const NotesInput = () => {
         {/* <Form.Label htmlFor="content">Content</Form.Label> */}
         <Form.Control
           type='text'
+          name='text'
           id="content"
           value={content}
           onChange={(event) => setContent(event.target.value)}

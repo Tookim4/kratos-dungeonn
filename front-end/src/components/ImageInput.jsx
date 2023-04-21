@@ -1,14 +1,13 @@
 import React, {useState} from 'react'
 import {Form, Button} from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { postImage } from '../features/imageSlice';
+// import { useDispatch } from 'react-redux';
 
 const ImageInput = () => {
   const [imageName, setImageName] = useState('');
   const [imageDescription, setImageDescription] = useState('');
   const [image, setImage] = useState(null);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();

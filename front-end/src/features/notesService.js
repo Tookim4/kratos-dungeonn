@@ -1,25 +1,53 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:5000/api/notes';
+const API_URL = 'http://localhost:5000/api/notes';
 
-const getAll = async () => {
-  const response = await axios.get(baseUrl);
-  return response.data;
-};
+// Get user goals
+const getNotes = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
 
-const create = async (newObject, userId) => {
-  const response = await axios.post(baseUrl, {...newObject, user: userId});
-  return response.data;
-};
+  const response = await axios.get(API_URL, config)
+  return response.data
+}
 
-const update = async (id, updatedNote) => {
-  const response = await axios.put(`${baseUrl}/${id}`, updatedNote);
-  return response.data;
-};
+// Create new goal
+const createNote = async (noteData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
 
-const remove = async (id) => {
-  const response = await axios.delete(`${baseUrl}/${id}`);
-  return response.data;
-};
+  const response = await axios.post(API_URL, noteData, config)
 
-export default { getAll, create, update, remove };
+  return response.data
+}
+
+
+// const update = async (id, updatedNote) => {
+//   const response = await axios.put(`${baseUrl}/${id}`, updatedNote);
+//   return response.data;
+// };  
+
+// const remove = async (id) => {
+//   const response = await axios.delete(`${API_URL}/${id}`);
+//   return response.data;
+// };
+// Delete user goal
+const deleteNote = async (noteId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.delete(API_URL + noteId, config)
+
+  return response.data
+}
+
+export default { getNotes, createNote, deleteNote };

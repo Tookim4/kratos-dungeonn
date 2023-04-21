@@ -11,52 +11,61 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const Note = require('../models/notesModel')
+const User = require('../models/userModel')
 
-//callback function to retrieve notes
-const getNotes = (req, res) => {
-  Note.find({})
-    .then(notes => {
-      res.json(notes);
-    })
-    .catch(err => {
-      res.status(500).json({ error: err });
-    });
-};
+// @desc    Get goals
+// @route   GET /api/goals
+// @access  Private
+const getNotes = asyncHandler(async (req, res) => {
+  const notes = await Note.find({ user: req.user.id })
+
+  res.status(200).json(notes)
+})
+
 
 //get one note
+// const getNote = asyncHandler(async (req, res) => {
+//   try {
+//     const note = await Note.findById(req.params.id)
 
-const getNote = asyncHandler(async (req, res) => {
-  try {
-    const note = await Note.findById(req.params.id)
+//     if (!note) {
+//       res.status(404)
+//       throw new Error('Note not found')
+//     }
 
-    if (!note) {
-      res.status(404)
-      throw new Error('Note not found')
-    }
-
-    res.status(200).json(note)
-  } catch (error) {
-    res.status(500).json({ error: error.message })
-  }
-});
+//     res.status(200).json(note)
+//   } catch (error) {
+//     res.status(500).json({ error: error.message })
+//   }
+// });
 
 
 //create a note
 const createNote = asyncHandler(async(req, res) => {
-  const {title, content} = req.body;
+  try {
+    const { title, content } = req.body;
+    const note = await Note.create({
+      title,
+      content,
+      user: req.user.id, // associate the note with the current user
+    });
+    await note.save();
+    res.json(note);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  if (!req.body.text) {
+    res.status(400)
+    throw new Error('Please add a text field')  
+  }}
 
-    const note = {
-        _id: new mongoose.Types.ObjectId(),
-        title,
-        content,
-      };
-    
-      try {
-        const newNote = await Note.create(note);
-        res.status(201).json(newNote);
-      } catch (err) {
-        res.status(400).json({ error: err.message });
-      }
+  // const { title, content } = req.body;
+  // const note = await Note.create({
+  //   title,
+  //   content,
+  //   user: req.user.id,
+  // })
+
+  // res.status(200).json(note)
 })
 
 
@@ -101,4 +110,4 @@ const deleteNote = async (req, res) => {
   }
 };
 
-module.exports = {getNotes, getNote, createNote, updateNote, deleteNote}
+module.exports = {getNotes, createNote, updateNote, deleteNote}
