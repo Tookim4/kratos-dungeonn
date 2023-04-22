@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { deleteNote, getNotes } from '../features/notesSlice';
+import { deleteNote, getNotes, reset } from '../features/notesSlice';
 import {NotesInput} from '../components/NotesInput';
 import {Card, Button, Container, Row, Col} from 'react-bootstrap';
 // import { notes } from '../features/notesSlice';
@@ -10,15 +10,25 @@ import Footer from '../components/Footer'
 
 const notesPage = (note) => {
   const dispatch = useDispatch();
-  const notes = useSelector((state) => state.notes.notes);
+
+  const { notes, isLoading, isError, message } = useSelector(
+    (state) => state.notes
+  )
 
   useEffect(() => {
-    dispatch(getNotes());
-  }, [ dispatch]);
+    if (isError) {
+      console.log(message)
+    }
+    dispatch(getNotes())
 
-  // if (isLoading) {
-  //   return <h3>LOADING...</h3>
-  // }
+    return () => {
+      dispatch(reset())
+    }
+  }, [isError, message, dispatch])
+
+  if (isLoading) {
+    return <i className="lni lni-reload"></i>
+  }
 
   return (
     <div style={{backgroundColor: 'darkgray', height: '100vh', display: 'flex', flexDirection:'column'}}>
@@ -32,11 +42,11 @@ const notesPage = (note) => {
           </Card.Body>
         </Card>
         {notes.map((note) => (
-          <Col >
+          <Col key={note._id}>
           <Card style={{  margin: '10px'}} key={note._id}>
             <Card.Title style={{fontSize: '1.1em', padding: '10px 15px'}}><b>{note.title}</b></Card.Title>
             <Card.Text style={{padding: '0 15px', fontSize: '0.8em'}}>{note.content}</Card.Text>
-            <Button onClick={() => dispatch(deleteNote(note._id))} style={{width: 'auto', margin: '10px'}} className="btn btn-danger">Delete</Button>
+            <i onClick={() => dispatch(deleteNote(note._id))} style={{width: 'auto', margin: '10px'}} className="lni lni-close"></i>
             {/* <Button style={{width: 'auto', margin: '10px'}}>Update</Button> */}
           </Card>
           </Col>

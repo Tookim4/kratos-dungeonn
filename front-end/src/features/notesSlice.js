@@ -118,5 +118,6 @@ export const noteSlice = createSlice({
   },
 })
 
-export const notes = (state) => state.notes.notes;
+export const notes = (state) => state.notes;
+export const { reset } = noteSlice.actions
 export default noteSlice.reducer;

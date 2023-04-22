@@ -7,6 +7,8 @@ import {logout, reset} from '../features/authSlice'
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import UserProfile from './UserProfile';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import './style.css'
 
 const NavBar = ()=> {
@@ -21,13 +23,13 @@ const NavBar = ()=> {
     }
   }, []);
 
-  const handleShowCard = (e) => {
-    e.preventDefault()
+  const handleShowCard = () => {
+    // e.preventDefault()
     setShowCard(true);
   }
 
-  const handleCloseCard = (e) => {
-    e.preventDefault()
+  const handleCloseCard = () => {
+    // e.preventDefault()
     setShowCard(false);
   }
 
@@ -48,32 +50,37 @@ const NavBar = ()=> {
             {/* //login link/ */}
          {user ? (
           <>
-          <Link className='nav-link' onClick={handleShowCard}>
-            {user.name}
-          </Link>
-            {showCard && (
-              <div className="overlay">
-                <div className="modal">
-                  <button className="close" onClick={handleCloseCard}>
-                    &times;
-                  </button>
-                <UserProfile
-                // // imageUrl="https://example.com/image.jpg"
-                // name={user.name}
-                // email={user.email}
-                />
-                </div>
-              </div>
-            )}
-            <Link className='nav-link' to={'/pages/image-page'}>
+           <Link className='nav-link' to={'/pages/image-page'}>
               Images
             </Link>
             <Link className='nav-link' to={'/pages/notes-page'}>
               Notes
             </Link>
-            <button className='nav-link btn' onClick={onLogout}>
+          <Link className='nav-link' onClick={handleShowCard} >
+           <i className="lni lni-user" ></i>
+          </Link>
+          
+          <>
+      {/* <Button variant="primary" onClick={handleShowCard}>
+        Launch demo modal
+      </Button> */}
+
+      <Modal size="sm" show={showCard} onHide={handleCloseCard}>
+        <Modal.Header closeButton>
+          {/* <Modal.Title>User Profile</Modal.Title> */}
+        </Modal.Header>
+        <Modal.Body>
+          <UserProfile/>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant='danger' onClick={onLogout}>
             Logout
-            </button>
+            </Button>
+        </Modal.Footer>
+      </Modal>
+      </>
+           
+            
           </>
          ):(<>
             <Link className='nav-link' to={'/pages/login-page'}>
