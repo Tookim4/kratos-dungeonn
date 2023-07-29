@@ -1,22 +1,19 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-
+import './style.css'
 
 const Footer = ()=> {
   return (
-    <footer className="bg-dark text-light py-3 mb-0">
-    <Container>
-      <Row>
-        <Col md={6}>
-          <p>&copy; {new Date().getFullYear()} Copyright:{'TheDungeon'}</p>
-        </Col>
-        <Col md={6}>
-        <a style={{color: 'white', textDecoration: 'none'}} href='/'>
+    <footer className="main-footer">
+    {/* <Container> */}
+      <div className='footer-div'>
+        <p>&copy; {new Date().getFullYear()} Copyright:{'TheDungeon'}</p>
+        <a href='/'>
           DeathStroke
         </a>
-        </Col>
-      </Row>
-    </Container>
+      
+      </div>
+    {/* </Container> */}
   </footer>
   );
 }

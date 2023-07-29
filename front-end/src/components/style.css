@@ -1,0 +1,23 @@
+.main-footer{
+    position: a;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+    height: 10vh;
+    background-color: #2C3333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.footer-div{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    color: #CBE4DE;
+    /* padding-top: 10px; */
+
+    & a {
+        text-decoration: none;
+        color: #CBE4DE;
+    }
+}

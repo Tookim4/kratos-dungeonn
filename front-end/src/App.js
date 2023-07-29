@@ -8,12 +8,12 @@ import LoginPage from './pages/login-page';
 import SignUpForm from './pages/signup-page';
 import notesPage from './pages/notes-page';
 import imagePage from './pages/image-page';
-import { GlobalStyle } from './styledcomponents/land-page-styled';
+// import { GlobalStyle } from './styledcomponents/land-page-styled';
 
 const App = ()=> { 
   return (
     <div>
-      <GlobalStyle/>
+      {/* <GlobalStyle/> */}
       <BrowserRouter>
           <Routes>
             <Route path='/' Component={LandPage}/>
