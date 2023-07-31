@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Button, Container, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { createNote } from '../features/notesSlice';
+import './style.css'
 
 export const NotesInput = () => {
 
@@ -28,12 +29,13 @@ export const NotesInput = () => {
   };
 
   return (
-    <Container style={{margin: '10px 0', padding:'15px 0'}}>
+    <Container >
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3">
       <div>
         {/* <Form.Label htmlFor="title">Title</Form.Label> */}
-        <Form.Control
+        <input
+        className='title-input'
           type="text"
           name='text'
           id="title"
@@ -47,7 +49,9 @@ export const NotesInput = () => {
       <Form.Group className="mb-3">
       <div>
         {/* <Form.Label htmlFor="content">Content</Form.Label> */}
-        <Form.Control
+        <textarea
+        className='textarea'
+        required
           type='text'
           name='text'
           id="content"
@@ -57,7 +61,7 @@ export const NotesInput = () => {
         />
       </div>
       </Form.Group>
-      <Button type="submit">Create Note</Button>
+      <button className='notes-btn' type="submit">Create Note</button>
     </Form>
     </Container>
   );

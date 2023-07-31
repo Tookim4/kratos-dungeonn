@@ -1,3 +1,36 @@
+/* Notesinput */
+.title-input{
+    border: 1px solid #CBE4DE;
+    color: #CBE4DE;
+    padding: 10px;
+    border-radius:15px;
+    background: none;
+    width: 100%;
+}
+.textarea {
+    border: 1px solid #CBE4DE;
+    color: #CBE4DE;
+    padding: 10px;
+    border-radius:15px ;
+    background: none;
+    width: 100%;
+}
+.notes-btn{
+    border: 1px solid #CBE4DE;
+    color: #CBE4DE;
+    border-radius: 15px;
+    padding: 10px;
+    background: none;
+    transition: 0.6s ease;
+
+    &:hover{
+        border: 1px solid #0E8388;
+        /* background: #0E8388; */
+        color: #0E8388;
+    }
+}
+/* footer styles */
+
 .main-footer{
     position: a;
   width: 100%;

@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import {AiFillDelete} from 'react-icons/ai'
 import { deleteNote, getNotes, reset } from '../features/notesSlice';
 import {NotesInput} from '../components/NotesInput';
 import {Card, Button, Container, Row, Col} from 'react-bootstrap';
@@ -31,9 +32,9 @@ const notesPage = (note) => {
   }
 
   return (
-    <div style={{backgroundColor: 'darkgray', height: '100vh', display: 'flex', flexDirection:'column'}}>
+    <div style={{backgroundColor: '#2C3333', height: '100vh', display: 'flex', flexDirection:'column'}}>
       <Container style={{padding: '40px 0', flex: '1'}}>
-      <h2 style={{textAlign: 'center'}}>Notes</h2>
+      <h2 style={{textAlign: 'center', color: '#CBE4DE'}}>Notes</h2>
        <ul>
         <Row xs={1} md={3} lg={4} className="g-4">
         <Card className='bg-transparent text-dark border-0'>
@@ -43,10 +44,10 @@ const notesPage = (note) => {
         </Card>
         {notes.map((note) => (
           <Col key={note._id}>
-          <Card style={{  margin: '10px'}} key={note._id}>
-            <Card.Title style={{fontSize: '1.1em', padding: '10px 15px'}}><b>{note.title}</b></Card.Title>
-            <Card.Text style={{padding: '0 15px', fontSize: '0.8em'}}>{note.content}</Card.Text>
-            <i onClick={() => dispatch(deleteNote(note._id))} style={{width: 'auto', margin: '10px'}} className="lni lni-close"></i>
+          <Card style={{  margin: '10px', background: '#2E4F4F'}} key={note._id}>
+            <Card.Title style={{fontSize: '1.1em', padding: '10px 15px', color: '#CBE4DE'}}><b>{note.title}</b></Card.Title>
+            <Card.Text style={{padding: '0 15px', fontSize: '0.8em', color: '#CBE4DE'}}>{note.content}</Card.Text>
+            <AiFillDelete onClick={() => dispatch(deleteNote(note._id))} style={{width: 'auto', margin: '10px', padding: '15px', color: '#CBE4DE', cursor: 'pointer'}}/>
             {/* <Button style={{width: 'auto', margin: '10px'}}>Update</Button> */}
           </Card>
           </Col>
