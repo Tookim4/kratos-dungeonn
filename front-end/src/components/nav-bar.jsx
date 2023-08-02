@@ -50,9 +50,9 @@ const NavBar = ()=> {
             {/* //login link/ */}
          {user ? (
           <>
-           <Link className='nav-link' to={'/pages/image-page'}>
+           {/* <Link className='nav-link' to={'/pages/image-page'}>
               Images
-            </Link>
+            </Link> */}
             <Link className='nav-link' to={'/pages/notes-page'}>
               Notes
             </Link>

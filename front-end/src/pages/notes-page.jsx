@@ -5,11 +5,12 @@ import {AiFillDelete} from 'react-icons/ai'
 import { deleteNote, getNotes, reset } from '../features/notesSlice';
 import {NotesInput} from '../components/NotesInput';
 import {Card, Button, Container, Row, Col} from 'react-bootstrap';
+// import { motion } from 'framer-motion';
 // import { notes } from '../features/notesSlice';
 import Footer from '../components/Footer'
 
 
-const notesPage = (note) => {
+const NotesPage = (note) => {
   const dispatch = useDispatch();
 
   const { notes, isLoading, isError, message } = useSelector(
@@ -28,7 +29,7 @@ const notesPage = (note) => {
   }, [isError, message, dispatch])
 
   if (isLoading) {
-    return <i className="lni lni-reload"></i>
+    // return <motion.div><i style={{position: 'absolute', top: '50%', left: '50%', fontSize: '5rem'}} className="lni lni-reload"></i></motion.div>
   }
 
   return (
@@ -60,4 +61,4 @@ const notesPage = (note) => {
   );
 };
 
-export default notesPage
+export default NotesPage
