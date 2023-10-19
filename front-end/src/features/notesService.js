@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/notes/';
+const API_URL = 'https://kratos-dungeonn-api.vercel.app/api/notes/';
 
 // Get user goals
 const getNotes = async (token) => {
