@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'https://kratos-dungeonn.vercel.app/api/users/'
+const API_URL = 'http://kratos-dungeonn.vercel.app/api/users/'
 
 // Register user
 const register = async (userData) => {
