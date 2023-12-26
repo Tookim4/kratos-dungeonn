@@ -9,6 +9,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { register, reset } from '../features/authSlice';
 import { Button } from '../styledcomponents/land-page-styled';
 import './style.scss'
+import NavBar from '../components/nav-bar';
+import { leapfrog } from 'ldrs'
 
 const SignUpForm = ()=> {
   const [data, setData] = useState({
@@ -18,6 +20,8 @@ const SignUpForm = ()=> {
     password2:"",
   })
   const {name, email, password, password2} = data
+
+  leapfrog.register()
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -60,12 +64,9 @@ const SignUpForm = ()=> {
     }
   }
 
-  if (isLoading) {
-    return <p>loading...</p>
-  }
-  
   return (
     <div>
+      <NavBar/>
     <Container>
     <Card style={{width: '20rem', position:'absolute', top:'50%', left:'50%', transform: 'translate(-50%, -50%)', border: '0px'}}>
       <h3 style={{marginBottom:'20px'}} className='signup-header'>Sign Up</h3>
@@ -126,6 +127,18 @@ const SignUpForm = ()=> {
             <Button type="submit" >
               Submit
             </Button>
+
+            {isLoading && (
+              <div className="loading">
+                  <l-leapfrog
+                  size="40"
+                  speed="2.5" 
+                  color="#2E4F4F" 
+                ></l-leapfrog>
+              </div>
+              )}
+
+
           </Form>
         </Card.Body>
       </Card>

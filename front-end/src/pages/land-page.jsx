@@ -44,9 +44,9 @@ const LandPage = () => {
                     <p className=" mb-5">
                        Welcome back to the Dojo xx...
                     </p>
-                    <a href="#about" className="btn btn-primary btn-lg">
+                    <Button className="btn btn-primary btn-lg">
                       Learn More
-                    </a>
+                    </Button>
                   </div> ) : (
                   <div className="text-center">
                     <h1 className="display-2 mb-2">Welcome to the Dungeon</h1>

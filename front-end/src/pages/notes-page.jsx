@@ -8,6 +8,7 @@ import {Card, Button, Container, Row, Col} from 'react-bootstrap';
 // import { motion } from 'framer-motion';
 // import { notes } from '../features/notesSlice';
 import Footer from '../components/Footer'
+import NavBar from '../components/nav-bar';
 
 
 const NotesPage = (note) => {
@@ -34,6 +35,7 @@ const NotesPage = (note) => {
 
   return (
     <div style={{backgroundColor: '#2C3333', height: '100vh', display: 'flex', flexDirection:'column'}}>
+      <NavBar/>
       <Container style={{padding: '40px 0', flex: '1'}}>
       <h2 style={{textAlign: 'center', color: '#CBE4DE'}}>Notes</h2>
        <ul>

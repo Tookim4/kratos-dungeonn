@@ -41,12 +41,12 @@ const NavBar = ()=> {
   }
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="none" variant="dark">
+    <Navbar collapseOnSelect expand="lg" variant='dark' style={{background: '#2E4F4F', color: '#CBE4DE'}}>
       <Container>
-        <Navbar.Brand href="#home">Kratos Dungeon</Navbar.Brand>
+        <Navbar.Brand href="/" style={{color: '#CBE4DE'}}>Kratos Dungeon</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto">
+        <Navbar.Collapse id="responsive-navbar-nav" >
+          <Nav className="ms-auto" style={{position: 'absolute', background: '#2E4F4F', right: '10%', margin: '20px', padding: '5px', color: '#CBE4DE', width: '10rem', transition: '0.5s'}}>
             {/* //login link/ */}
          {user ? (
           <>
@@ -83,11 +83,11 @@ const NavBar = ()=> {
             
           </>
          ):(<>
-            <Link className='nav-link' to={'/pages/login-page'}>
+            <Link className='nav-link' style={{color: '#CBE4DE'}} to={'/pages/login-page'}>
               Login
             </Link>
              
-            <Link className='nav-link' eventkey={2} to={'/pages/signup-page'}>
+            <Link className='nav-link' eventkey={2} style={{color: '#CBE4DE'}} to={'/pages/signup-page'}>
               Sign Up
             </Link>
          </>

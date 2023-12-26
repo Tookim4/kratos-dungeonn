@@ -50,3 +50,11 @@
         color: #CBE4DE;
     }
 }
+
+.nav-link {
+    color: #CBE4DE;
+
+    &:hover{
+        border-bottom: 1px solid #CBE4DE;
+    }
+}
