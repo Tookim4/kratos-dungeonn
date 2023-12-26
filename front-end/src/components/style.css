@@ -25,19 +25,16 @@
 
     &:hover{
         border: 1px solid #0E8388;
-        /* background: #0E8388; */
         color: #0E8388;
     }
 }
-/* footer styles */
 
 .main-footer{
-    position: a;
+    position: fixed;
   width: 100%;
   bottom: 0;
-  left: 0;
     height: 10vh;
-    background-color: #2C3333;
+    background-color: #2E4F4F;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,7 +44,6 @@
     display: flex;
     justify-content: space-evenly;
     color: #CBE4DE;
-    /* padding-top: 10px; */
 
     & a {
         text-decoration: none;

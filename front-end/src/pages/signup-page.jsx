@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-// import {toast} from 'react-toastify'
 import Container from 'react-bootstrap/esm/Container';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -9,6 +7,8 @@ import Footer from '../components/Footer'
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { register, reset } from '../features/authSlice';
+import { Button } from '../styledcomponents/land-page-styled';
+import './style.scss'
 
 const SignUpForm = ()=> {
   const [data, setData] = useState({
@@ -67,13 +67,12 @@ const SignUpForm = ()=> {
   return (
     <div>
     <Container>
-    <Card style={{width: '20rem', position:'absolute', top:'50%', left:'50%', transform: 'translate(-50%, -50%)'}}>
-      <Card.Title style={{margin:'20px'}}>Sign Up</Card.Title>
-        <Card.Body>
+    <Card style={{width: '20rem', position:'absolute', top:'50%', left:'50%', transform: 'translate(-50%, -50%)', border: '0px'}}>
+      <h3 style={{marginBottom:'20px'}} className='signup-header'>Sign Up</h3>
+        <Card.Body className='card-body'>
         <Form onSubmit={onSubmit}>
-              <InputGroup className="mb-3">
-                  <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-                  <Form.Control
+              <InputGroup className="mb-3 form-group">
+                  <input
                   type='text'
                   name='name'
                   value={name}
@@ -81,57 +80,58 @@ const SignUpForm = ()=> {
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   onChange={onChange}
+                  className='form-input'
                   />
               </InputGroup>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
+            <Form.Group className="mb-3 form-group" controlId="formBasicEmail">
+              {/* <Form.Label>Email address</Form.Label> */}
+              <input
                type="email" 
                placeholder="Enter email" 
                name='email'
                value={email}
                onChange={onChange}
+               className='form-input'
                />
+               <br />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
+            <Form.Group className="mb-3 form-group" controlId="formBasicPassword">
+              {/* <Form.Label>Password</Form.Label> */}
+              <input
                type="password" 
                placeholder="Password" 
                name='password'
                value={password}
                onChange={onChange}
+               className='form-input'
                />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
+            <Form.Group className="mb-3 form-group" controlId="formBasicConfirmPassword">
+              {/* <Form.Label>Confirm Password</Form.Label> */}
+              <input
                type="password" 
-               placeholder="Password" 
+               placeholder="Confirm Password" 
                name='password2'
                value={password2}
                onChange={onChange}
+               className='form-input'
                />
             </Form.Group>
             
-            <Button variant="primary" type="submit" >
+            <Button type="submit" >
               Submit
             </Button>
           </Form>
         </Card.Body>
       </Card>
     </Container>
-    
     <Footer/>
-    
-    </div>
-  
-   
+    </div> 
   );
 }
 
