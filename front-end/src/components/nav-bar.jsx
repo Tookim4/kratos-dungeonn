@@ -46,10 +46,10 @@ const NavBar = ()=> {
         <Navbar.Brand href="/" style={{color: '#CBE4DE'}}>Kratos Dungeon</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" >
-          <Nav className="ms-auto" style={{position: 'absolute', background: '#2E4F4F', right: '10%', margin: '20px', padding: '5px', color: '#CBE4DE', width: '10rem', transition: '0.5s'}}>
+          <Nav className="ms-auto" style={{position: 'absolute', background: '#2E4F4F', right: '10%', margin: '20px', padding: '5px', color: '#CBE4DE', transition: '0.5s'}}>
             {/* //login link/ */}
      
-            <Link className='nav-link' to={'/pages/about-page'}>
+            <Link className='nav-link' style={{color: '#CBE4DE'}} to={'/pages/about-page'}>
               About
             </Link>
          {user ? (
