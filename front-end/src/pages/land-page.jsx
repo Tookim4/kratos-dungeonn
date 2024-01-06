@@ -5,7 +5,7 @@ import {Div, MainDiv, Button} from '../styledcomponents/land-page-styled'
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { reset } from '../features/authSlice';
-import CursorInteract from '../components/cursorInteract';
+
 import './style.scss'
 
 const LandPage = () => {
@@ -44,8 +44,8 @@ const LandPage = () => {
                     <p className=" mb-5">
                        Welcome back to the Dojo xx...
                     </p>
-                    <Button className="btn btn-primary btn-lg">
-                      Learn More
+                    <Button to={"pages/about-page"} className="btn btn-primary btn-lg">
+                        Learn More
                     </Button>
                   </div> ) : (
                   <div className="text-center">

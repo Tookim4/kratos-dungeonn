@@ -7,6 +7,7 @@ import LandPage from "./pages/land-page";
 import LoginPage from './pages/login-page';
 import SignUpForm from './pages/signup-page';
 import NotesPage from './pages/notes-page';
+import aboutPage from './pages/about-page';
 // import { GlobalStyle } from './styledcomponents/land-page-styled';
 
 const App = ()=> { 
@@ -19,6 +20,8 @@ const App = ()=> {
             <Route path='pages/login-page' Component={LoginPage}/>
             <Route path='pages/signup-page' Component={SignUpForm}/>
             <Route path='pages/notes-page' Component={NotesPage}/>
+            <Route path='pages/about-page' Component={aboutPage}/>
+
           </Routes>
       </BrowserRouter>
         {/* <ToastContainer/> */}

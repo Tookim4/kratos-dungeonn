@@ -48,6 +48,10 @@ const NavBar = ()=> {
         <Navbar.Collapse id="responsive-navbar-nav" >
           <Nav className="ms-auto" style={{position: 'absolute', background: '#2E4F4F', right: '10%', margin: '20px', padding: '5px', color: '#CBE4DE', width: '10rem', transition: '0.5s'}}>
             {/* //login link/ */}
+     
+            <Link className='nav-link' to={'/pages/about-page'}>
+              About
+            </Link>
          {user ? (
           <>
            {/* <Link className='nav-link' to={'/pages/image-page'}>
@@ -73,9 +77,9 @@ const NavBar = ()=> {
           <UserProfile/>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant='danger' onClick={onLogout}>
+          <button className='logout-btn' onClick={onLogout}>
             Logout
-            </Button>
+            </button>
         </Modal.Footer>
       </Modal>
       </>

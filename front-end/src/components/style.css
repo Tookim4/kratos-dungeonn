@@ -58,3 +58,25 @@
         border-bottom: 1px solid #CBE4DE;
     }
 }
+
+.black-card {
+    /* background: #2C3333; */
+}
+
+.text-section {
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.logout-btn {
+    background: #2E4F4F;
+    border: 1px solid #CBE4DE;
+    border-radius: 8px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    color: #CBE4DE;
+    transition: 0.5s ease;
+
+    &:hover{
+        color: #2E4F4F;
+        background: #CBE4DE;
+    }
+}
